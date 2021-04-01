@@ -1,5 +1,5 @@
 # *FOR MEMBERS: Name your files in this way:*
-## *"FileName_MemberFullName1" or "FileName_MemberFullName2"*
+## *"FileName_MemberFullName1" or "FileName_MemberFullName1_MemberFullName2"*
 ## *"FileName_VariousAuth" for files with multiple authors. Write the names as comments, first spreadsheet row etc. in this case*
 # Project NextStep
 ## Purdue University
