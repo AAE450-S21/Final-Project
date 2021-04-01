@@ -1,0 +1,60 @@
+length = 10;
+rad_inner = 3;
+
+d_liner = 960;
+d_bladder_packed = 940;
+d_restraint = 1400;
+d_thermal = 1390;
+d_zylon = 1560;
+d_foam_packed = 1395;
+d_foam = 481;
+
+t_liner = 1e-3;
+t_bladder_packed = 6*13*1e-6;
+t_bladder = 6*25*1e-3;
+t_restraint = 10*1e-3;
+t_thermal = 5.34*1e-3;
+t_zylon = 2*2.39*1e-2;
+t_foam = 0.1;
+t_foam_packed = d_foam*t_foam/d_foam_packed;
+
+t_total = t_liner + t_bladder + t_restraint + t_thermal + t_zylon + t_foam;
+t_packed = t_liner + t_bladder_packed + t_restraint + t_thermal + t_zylon + t_foam_packed;
+
+rad_outer = rad_inner + t_total;
+
+h_packed = pi*rad_inner + 2*t_packed;
+w_packed = 2*t_packed;
+v_packed = length * h_packed * w_packed * 2;
+
+v_inner = rad_inner^2 * pi * length;
+v_1 = (rad_inner + t_liner)^2 * pi * length;
+v_2 = (rad_inner + t_liner + t_bladder)^2 * pi * length;
+v_3 = (rad_inner + t_liner + t_bladder + t_restraint)^2 * pi * length;
+v_4 = (rad_inner + t_liner + t_bladder + t_restraint + t_thermal)^2 * pi * length;
+v_5 = (rad_inner + t_liner + t_bladder + t_restraint + t_thermal + t_zylon)^2 * pi * length;
+v_outer = (rad_inner + t_liner + t_bladder + t_restraint + t_thermal + t_zylon + t_foam)^2 * pi * length;
+
+v_liner = v_1 - v_inner;
+v_bladder = v_2 - v_1;
+v_restraint = v_3 - v_2;
+v_thermal = v_4 - v_3;
+v_zylon = v_5 - v_4;
+v_foam = v_outer - v_5;
+
+d_bladder = d_bladder_packed*t_bladder_packed/t_bladder;
+
+m_liner = d_liner * v_liner;
+m_bladder = d_bladder * v_bladder;
+m_restraint = d_restraint * v_restraint;
+m_thermal = d_thermal * v_thermal;
+m_zylon = d_zylon * v_zylon;
+m_foam = d_foam * v_foam;
+
+m_total = m_liner + m_bladder + m_restraint + m_thermal + m_zylon + m_foam; 
+
+tf_liner = t_liner / t_total;
+tf_bladder = t_bladder / t_total;
+tf_restraint = t_restraint / t_total;
+tf_thermal = t_thermal / t_total;
+tf_shield = (t_zylon+t_foam) / t_total;
