@@ -1,0 +1,119 @@
+%% Physical constants
+R = 8.314; % J/K-mol
+molar_mass_oxygen = 0.031999; % kg/mol
+molar_mass_nitrogen = 0.028014; % kg/mol
+
+
+%% Module Properties
+n = 1;
+module_pressure = 55.5e3;  % Pa
+module_volume = 540.2; % m3
+module_temperature = 295; % K (72 degF)
+
+fraction_oxygen = 0.32;
+fraction_nitrogen = 0.68;
+
+module_k = module_pressure * module_volume;
+module_mol_total = module_k / (R * module_temperature);
+module_mol_oxygen = fraction_oxygen * module_mol_total;
+module_mol_nitrogen = fraction_nitrogen * module_mol_total;
+
+module_mass_oxygen = module_mol_oxygen * molar_mass_oxygen;
+module_mass_nitrogen = module_mol_nitrogen * molar_mass_nitrogen;
+module_mass = module_mass_oxygen + module_mass_nitrogen;
+
+module_pressure_oxygen = fraction_oxygen * module_pressure;
+module_pressure_nitrogen = fraction_nitrogen * module_pressure;
+
+module_k_oxygen = module_pressure_oxygen * module_volume;
+module_k_nitrogen = module_pressure_nitrogen * module_volume;
+
+%% Tank Temperature
+tank_temperature = 243; % K
+
+%% Northrop Grumman Monolithic Titanium Pressurant Tank 80218-1 Properties
+tank_ng_pressure = 23442170; % Pa (7356 psi)
+tank_ng_volume = 0.1207; % m3 (7365 in3)
+tank_ng_mass_empty = 35.8; % kg
+
+tank_ng_k = tank_ng_pressure*tank_ng_volume;
+tank_ng_mol = tank_ng_k / (R * tank_temperature);
+
+tank_ng_mass_oxygen = tank_ng_mol * molar_mass_oxygen;
+tank_ng_mass_nitrogen = tank_ng_mol * molar_mass_nitrogen;
+
+tank_ng_number_oxygen = module_mass_oxygen / tank_ng_mass_oxygen;
+tank_ng_number_nitrogen = module_mass_nitrogen / tank_ng_mass_nitrogen;
+
+%% ISS High Pressure Gas Tank (HPGT) Properties
+tank_hpgt_pressure = 23442170; % Pa (3400 psi)
+tank_hpgt_volume = 0.4276; % m3 (26093 in3)
+tank_hpgt_mass_empty = 544; % kg
+
+tank_hpgt_k = tank_hpgt_pressure*tank_hpgt_volume;
+tank_hpgt_mol = tank_hpgt_k / (R * tank_temperature);
+
+tank_hpgt_mass_oxygen = tank_hpgt_mol * molar_mass_oxygen;
+tank_hpgt_mass_nitrogen = tank_hpgt_mol * molar_mass_nitrogen;
+
+tank_hpgt_number_oxygen = module_mass_oxygen / tank_hpgt_mass_oxygen;
+tank_hpgt_number_nitrogen = module_mass_nitrogen / tank_hpgt_mass_nitrogen;
+
+%% ISS Nitrogen Oxygen Recharge System (NORS) Properties
+tank_nors_pressure = 41.4e6; % Pa (6000 psi)
+tank_nors_volume = 0.0759; % m3 (2.68 ft3)
+tank_nors_mass_empty = 47.2; % kg
+
+tank_nors_k = tank_nors_pressure*tank_nors_volume;
+tank_nors_mol = tank_nors_k / (R * tank_temperature);
+
+tank_nors_mass_oxygen = tank_nors_mol * molar_mass_oxygen;
+tank_nors_mass_nitrogen = tank_nors_mol * molar_mass_nitrogen;
+
+tank_nors_number_oxygen = module_mass_oxygen / tank_nors_mass_oxygen;
+tank_nors_number_nitrogen = module_mass_nitrogen / tank_nors_mass_nitrogen;
+
+%% Orbital ATK Composite Overwrapped Pressure Vessels (COPV)
+tank_copv_pressure = 30998828.79; % Pa (4496 psi)
+tank_copv_volume = 0.087; % m3 (87.0 liters)
+tank_copv_mass_empty = 16.8; % kg
+
+tank_copv_k = tank_copv_pressure*tank_copv_volume;
+tank_copv_mol = tank_copv_k / (R * tank_temperature);
+
+tank_copv_mass_oxygen = tank_copv_mol * molar_mass_oxygen;
+tank_copv_mass_nitrogen = tank_copv_mol * molar_mass_nitrogen;
+
+tank_copv_number_oxygen = module_mass_oxygen / tank_copv_mass_oxygen;
+tank_copv_number_nitrogen = module_mass_nitrogen / tank_copv_mass_nitrogen;
+
+%% Required number of each tank
+tank_ng_number_oxygen = ceil(tank_ng_number_oxygen);
+tank_ng_number_nitrogen = ceil(tank_ng_number_nitrogen);
+tank_ng_number = tank_ng_number_oxygen + tank_ng_number_nitrogen;
+
+tank_hpgt_number_oxygen = ceil(tank_hpgt_number_oxygen);
+tank_hpgt_number_nitrogen = ceil(tank_hpgt_number_nitrogen);
+tank_hpgt_number = tank_hpgt_number_oxygen + tank_hpgt_number_nitrogen;
+
+tank_nors_number_oxygen = ceil(tank_nors_number_oxygen);
+tank_nors_number_nitrogen = ceil(tank_nors_number_nitrogen);
+tank_nors_number = tank_nors_number_oxygen + tank_nors_number_nitrogen;
+
+tank_copv_number_oxygen = ceil(tank_copv_number_oxygen);
+tank_copv_number_nitrogen = ceil(tank_copv_number_nitrogen);
+tank_copv_number = tank_copv_number_oxygen + tank_copv_number_nitrogen;
+
+%% Calculate total required mass corresponding to each tank
+tank_ng_mass_req = (tank_ng_mass_empty*tank_ng_number) + module_mass;
+tank_ng_mass_max = (tank_ng_mass_empty*tank_ng_number) + tank_ng_mass_oxygen*tank_ng_number_oxygen + tank_ng_mass_nitrogen*tank_ng_number_nitrogen;
+
+tank_hpgt_mass_req = (tank_hpgt_mass_empty*tank_hpgt_number) + module_mass;
+tank_hpgt_mass_max = (tank_hpgt_mass_empty*tank_hpgt_number) + tank_hpgt_mass_oxygen*tank_hpgt_number_oxygen + tank_hpgt_mass_nitrogen*tank_hpgt_number_nitrogen;
+
+tank_nors_mass_req = (tank_nors_mass_empty*tank_nors_number) + module_mass;
+tank_nors_mass_max = (tank_nors_mass_empty*tank_nors_number) + tank_nors_mass_oxygen*tank_nors_number_oxygen + tank_nors_mass_nitrogen*tank_nors_number_nitrogen;
+
+tank_copv_mass_req = (tank_copv_mass_empty*tank_copv_number) + module_mass;
+tank_copv_mass_max = (tank_copv_mass_empty*tank_copv_number) + tank_copv_mass_oxygen*tank_copv_number_oxygen + tank_copv_mass_nitrogen*tank_copv_number_nitrogen;
+
