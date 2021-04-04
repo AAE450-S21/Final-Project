@@ -1,34 +1,47 @@
 close all; clear all; clc;
 
 global h g_accel Vc hscale thrust m0 A cD rho mdot
-h = 1*10^5;
+% Velocity
+rM = 1738.2;
+mMu = 4902.8005821478;
+
+rp = rM + 15.24;
+ra = rM + 100;
+
+a = (rp + ra) / 2;
+e = (ra-rp)/(ra+rp);
+p = rp*(1+e);
+Vc = sqrt(2*mMu/rp - mMu / a) * 1000;
+
+% Everything else
+
+h = (rp - rM)*1000;
 hscale = 8440;
-Vc = sqrt(4902.8005821478/(1738.2+h/1000)) * 1000;
 g_accel = 1.625;
-thrust = 16000;
-m0 = 4700;
+thrust = 45000;
+m0 = 10334 + 4700;
 A = 7.069;
 cD = 0;
 rho = 1.225;
-mdot = 5.119;
+mdot = 15.422;
 
 global x0 y0 Vx0 Vy0 yf Vxf Vyf Hf
 
 %% Boundary Consitions
 x0 = 0;
-y0 = 0;
-Vx0 = 0;
+y0 = 1;
+Vx0 = 1;
 Vy0 = 0;
 
-yf = 1;
-Vxf = 1;
+yf = 0;
+Vxf = 0;
 Vyf = 0;
 Hf = -1;
 
 %% Initial Guesses
 t0 = 0;
 lambda20 = 0;
-lambda30 = -1;
+lambda30 = 1;
 lambda40 = 0;
 
 yinit = [x0 y0 Vx0 Vy0 lambda20 lambda30 lambda40];
@@ -52,8 +65,8 @@ delta_tf = 105;
 tf = sol.parameters(1);
 solinit_mass.parameters(1) = tf - delta_tf;
 
-m0 = 4700;
-mdot = 5.11;
+m0 = 10334 + 4700;
+mdot = 15.422;
 
 sol_mass = bvp4c(@ascent_odes_tf, @ascent_bcs_tf, solinit_mass);
 tf = sol_mass.parameters(1);
@@ -81,10 +94,11 @@ deltaV = 9.81*311*log(m0/mf);
 close all;
 
 figure(1)
+axis equal
 plot(x_sol,y_sol)
 xlabel('x position (km)')
 ylabel('y position (km)')
-title('y sol vs x sol Cody Martin')
+title('Flat Lunar Descent Cody Martin')
 
 figure(2)
 plot(time,theta)
@@ -117,8 +131,6 @@ xlabel('time (s)')
 ylabel('y velocity (km/s)')
 %title('y velocity vs time Cody Martin')
 
-
-%% 
 %% Lunar Descent Hohmann Transfer
 rM = 1738.2;
 mMu = 4902.8005821478;
@@ -141,12 +153,18 @@ p = rp*(1+e);
 v = sqrt(2*mMu/rp - mMu / a);
 
 %delta v
-%deltaVho = (sqrt(mMu / ra) - sqrt(2*mMu/ra - mMu / a)) * 1000;
+deltaVho = (sqrt(mMu / ra) - sqrt(2*mMu/ra - mMu / a)) * 1000;
+period = 2*pi*sqrt(a^3/mMu);
 
-%fprintf('The delta v calculated for takeoff is %.3f m/s.\n',deltaV);
-%fprintf('The delta v calculated for the hohmann transfer is %.3f m/s.\n',deltaVho);
+fprintf('The delta v calculated for landing is %.3f m/s.\n',deltaV);
+fprintf('The delta v calculated for the hohmann transfer is %.3f m/s.\n',deltaVho);
 
 % Big plotting
+theta = [linspace(90,270,361)];
+r = p ./ (1+e.*cosd(theta - 90));
+ehat = r.*cosd(theta);
+phat = r.*sind(theta);
+
 theta = [linspace(0,360,361)];
 moonE = rM.*cosd(theta);
 moonP = rM.*sind(theta);
@@ -155,34 +173,37 @@ r2 = ra;
 ehat2 = r2.*cosd(theta);
 phat2 = r2.*sind(theta);
 
+
 figure(4)
 hold on
 grid on
 axis equal
-title('Lunar Ascent Cody Martin')
-xlim([-50,900])
-ylim([1500,1950])
+title('Lunar Descent Cody Martin')
+xlim([-50,450])
+ylim([1600,1850])
 xlabel('X position (km)')
 ylabel('Y position (km)')
 fill(moonE,moonP,[.8 .8 .8])
 plot(ehat2,phat2,'g')
+plot(ehat,phat,'b')
 plot(xfix, yfix)
-legend({'Lunar Surface','100km Parking Orbit', 'Ascent'}, 'Location', 'SouthWest')
+legend({'Lunar Surface','100km Parking Orbit', '100x15.24km Elliptical Orbit', 'Final Powered Descent'}, 'Location', 'SouthWest')
 
 figure(5)
 hold on
 grid on
 axis equal
-xlim([-2000,2000])
-ylim([-2000,2000])
-title('Lunar Ascent Cody Martin')
+title('Lunar Descent Cody Martin')
+%xlim([-50,450])
+%ylim([1600,1850])
 xlabel('X position (km)')
 ylabel('Y position (km)')
 fill(moonE,moonP,[.8 .8 .8])
 plot(ehat2,phat2,'g')
+plot(ehat,phat,'b')
 plot(xfix, yfix)
-legend({'Lunar Surface','100km Parking Orbit', 'Ascent'}, 'Location', 'SouthWest')
-
+legend({'Lunar Surface','100km Parking Orbit', '100x15.24km Elliptical Orbit', 'Final Powered Descent'}, 'Location', 'Best')
+%}
 %% Functions
 function dX_dtau = ascent_odes_tf(tau,X,tf)
 global h Vc thrust mass rho cD A hscale g_accel m0 mdot
