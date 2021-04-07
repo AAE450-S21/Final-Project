@@ -1,0 +1,192 @@
+
+// ConfigureOptimizationGridWindow(GridWindow, Optimizer)
+
+Define Procedure ConfigureOptimizationGridWindow(GridWindow gw, Optimizer opt);
+	
+	gw.BeginBatchUpdate();
+	
+	// Initialize Variables
+	Variable numStateVariables = opt.GetStateVariableValues.Count; // Number of state variables
+	Variable numConstraints = opt.GetConstraintValues.Count; // Number of constraints
+	Variable numStateVariableRows = 2*(numStateVariables - 1); // Number of rows beyond 1 needed for state variables
+	Variable numConstraintRows = 0; // Number of rows beyond 1 needed for constraints
+	
+	If (numConstraints > 0);
+		numConstraintRows = 2*(numConstraints - 1);
+	End;
+	
+	Variable stateVariableStartRow; // Which row to start listing state variables
+	Variable constraintStartRow; // Which row to start listing costraints
+	Variable bestSolutionStartRow; // Which row to start the Best Solution section
+	Variable k; // For loops
+	Variable adaptiveColumnLength = 7; // Length of longest state variable and constraint label
+	
+	For k = 1 to numStateVariables;
+		If (opt.StateVariables[k-1].Label.Length > adaptiveColumnLength);
+			adaptiveColumnLength = opt.StateVariables[k-1].Label.Length;
+		End;
+	End;
+	
+	For k = 1 to numConstraints;
+		If (opt.Constraints[k-1].Label.Length > adaptiveColumnLength);
+			adaptiveColumnLength = opt.Constraints[k-1].Label.Length;
+		End;
+	End;
+	
+	gw.WindowTitle = "Optimization Window";
+	
+	gw.GridLineColor = ColorTools.White;
+	
+	// Configure rows
+	gw.NumberOfRows = 24 + numStateVariableRows + numConstraintRows;
+	gw.SetRowHeight(0, 10, 1);
+	gw.SetRowHeight(2, 10, 1);
+	gw.SetRowHeight(5, 10, 1);
+	gw.SetRowHeight(7, 10, 1);
+	gw.SetRowHeight(9, 10, 1);
+	gw.SetRowHeight(11, 10, 1);
+	
+	// Configure columns
+	gw.NumberOfColumns = 7;
+	gw.SetColumnWidth(0, 2, 0);
+	gw.SetColumnWidth(1, 18, 0);
+	gw.SetColumnWidth(2, adaptiveColumnLength, 0);
+	gw.SetColumnWidth(3, 11, 0);
+	gw.SetColumnWidth(4, 18, 0);
+	gw.SetColumnWidth(5, 10, 0);
+	gw.SetColumnWidth(6, 2, 0);
+	gw.GetColumn(3).AlignmentHorizontal = "Right";	
+	
+	// Header
+	gw.GetCell(1,1).SetValue("Problem Name:");
+	gw.GetCell(1,1).Font.Bold = 1;
+	gw.GetCell(1,2).SetValue(opt.ProblemName);
+	gw.GetCell(1,2).ColumnSpan = 4;
+
+	gw.GetCell(3,1).SetValue("Status:");
+
+	gw.GetCell(4,1).SetValue("Feasible Solution Found?");
+
+	gw.GetCell(3,4).SetValue("Nominal Evaluation Count");
+	gw.GetCell(3,4).AlignmentHorizontal = "Left";
+
+	gw.GetCell(4,4).SetValue("Total Evaluation Count");
+	gw.GetCell(4,4).AlignmentHorizontal = "Left";
+
+	// Current Iteration
+	gw.GetCell(6,1).SetValue("Current Iteration");
+	gw.GetCell(6,1).Font.Bold = 1;
+	gw.GetCell(6,1).Font.Underline = 1;
+	gw.GetCell(6,1).ColumnSpan = 5;
+	gw.GetCell(6,1).AlignmentHorizontal = "Center";
+
+	gw.GetCell(8,1).SetValue("Feasible?");
+	gw.GetCell(8,1).AlignmentHorizontal = "Left";
+	gw.GetCell(8,2).SetTextColorRules({"Yes", "No"}, {ColorTools.Green, ColorTools.Red});
+	
+	gw.GetCell(8,4).SetValue("Maximum Infeasibility");
+	gw.GetCell(8,4).AlignmentHorizontal = "Left";
+	
+	gw.GetCell(10,1).SetValue("Objective Function");
+	gw.GetCell(10,1).Font.Bold = 1;
+	
+	gw.GetCell(10,2).SetValue(opt.ObjectiveFunctionLabel);
+	
+	stateVariableStartRow = 12;
+	gw.GetCell(stateVariableStartRow,1).SetValue("State Variables");
+	gw.GetCell(stateVariableStartRow,1).Font.Bold = 1;
+		
+	For k = 1 to numStateVariables;
+		gw.GetCell(stateVariableStartRow + (k-1),2).SetValue(opt.StateVariables[k-1].Label);
+		gw.GetCell(stateVariableStartRow + (k-1),3).SetValue(0);
+		gw.GetCell(stateVariableStartRow + (k-1),3).SetTextColorRules({opt.StateVariables[k-1].LowerBound - 1e-9, opt.StateVariables[k-1].UpperBound + 1e9}, {ColorTools.Red, ColorTools.Green, ColorTools.Red});
+		If (opt.StateVariables[k-1].LowerBound != -1e20 and opt.StateVariables[k-1].UpperBound != 1e20);
+			gw.GetCell(stateVariableStartRow + (k-1),4).SetValue("(" + opt.StateVariables[k-1].LowerBound.Format("%.3f") + ", " + opt.StateVariables[k-1].UpperBound.Format("%.3f") + ")");
+		ElseIf (opt.StateVariables[k-1].LowerBound == -1e20 and opt.StateVariables[k-1].UpperBound != 1e20);
+			gw.GetCell(stateVariableStartRow + (k-1),4).SetValue("(undef, " + opt.StateVariables[k-1].UpperBound.Format("%.3f") + ")");
+		ElseIf (opt.StateVariables[k-1].LowerBound != -1e20 and opt.StateVariables[k-1].UpperBound == 1e20);
+			gw.GetCell(stateVariableStartRow + (k-1),4).SetValue("(" + opt.StateVariables[k-1].LowerBound.Format("%.3f") + ", undef)");
+		Else;
+			gw.GetCell(stateVariableStartRow + (k-1),4).SetValue("(undef, undef)");
+		End;
+	End;
+	
+	gw.SetRowHeight(stateVariableStartRow + numStateVariables, 10, 1);
+	
+	constraintStartRow = stateVariableStartRow + numStateVariables + 1;
+	
+	If (numConstraints > 0);
+		gw.GetCell(constraintStartRow,1).SetValue("Constraints");
+		gw.GetCell(constraintStartRow,1).Font.Bold = 1;
+		For k = 1 to numConstraints;
+			gw.GetCell(constraintStartRow + (k-1),2).SetValue(opt.Constraints[k-1].Label);
+			gw.GetCell(constraintStartRow + (k-1),3).SetValue(0);
+			If (opt.Constraints[k-1].LowerBound != opt.Constraints[k-1].UpperBound);
+				gw.GetCell(constraintStartRow + (k-1),3).SetTextColorRules({opt.Constraints[k-1].LowerBound - opt.FeasibilityTolerance, opt.Constraints[k-1].UpperBound + opt.FeasibilityTolerance}, {ColorTools.Red, ColorTools.Green, ColorTools.Red});
+			End;
+			gw.GetCell(constraintStartRow + (k-1),4).SetValue("(" + opt.Constraints[k-1].LowerBound.Format("%.3f") + ", " + opt.Constraints[k-1].UpperBound.Format("%.3f") + ")");
+		End;
+		gw.SetRowHeight(constraintStartRow + numConstraints, 10, 1);
+	End;
+	
+	// Best Solution
+	If (numConstraints > 0);
+		bestSolutionStartRow = constraintStartRow + numConstraints + 1;
+	Else;
+		bestSolutionStartRow = constraintStartRow;
+	End;
+	
+	gw.GetCell(bestSolutionStartRow,1).SetValue("Best Feasible Solution");
+	gw.GetCell(bestSolutionStartRow,1).Font.Bold = 1;
+	gw.GetCell(bestSolutionStartRow,1).Font.Underline = 1;
+	gw.GetCell(bestSolutionStartRow,1).ColumnSpan = 5;
+	gw.GetCell(bestSolutionStartRow,1).AlignmentHorizontal = "Center";
+	
+	gw.SetRowHeight(bestSolutionStartRow + 1, 10, 1);
+	
+	gw.GetCell(bestSolutionStartRow + 2,1).SetValue("Objective Function");
+	gw.GetCell(bestSolutionStartRow + 2,1).Font.Bold = 1;
+	
+	gw.GetCell(bestSolutionStartRow + 2,2).ColumnSpan = 3;
+	gw.GetCell(bestSolutionStartRow + 2, 2).TextColor = ColorTools.Red;
+
+	stateVariableStartRow = bestSolutionStartRow + 4;
+	gw.GetCell(stateVariableStartRow,1).SetValue("State Variables");
+	gw.GetCell(stateVariableStartRow,1).Font.Bold = 1;
+	
+	For k = 1 to numStateVariables;
+		gw.GetCell(stateVariableStartRow + (k-1),2).SetValue(opt.StateVariables[k-1].Label);
+		gw.GetCell(stateVariableStartRow + (k-1),3).SetValue(0);
+		gw.GetCell(stateVariableStartRow + (k-1),3).TextColor = ColorTools.Green;
+		If (opt.StateVariables[k-1].LowerBound != -1e20 and opt.StateVariables[k-1].UpperBound != 1e20);
+			gw.GetCell(stateVariableStartRow + (k-1),4).SetValue("(" + opt.StateVariables[k-1].LowerBound.Format("%.3f") + ", " + opt.StateVariables[k-1].UpperBound.Format("%.3f") + ")");
+		ElseIf (opt.StateVariables[k-1].LowerBound == -1e20 and opt.StateVariables[k-1].UpperBound != 1e20);
+			gw.GetCell(stateVariableStartRow + (k-1),4).SetValue("(undef, " + opt.StateVariables[k-1].UpperBound.Format("%.3f") + ")");
+		ElseIf (opt.StateVariables[k-1].LowerBound != -1e20 and opt.StateVariables[k-1].UpperBound == 1e20);
+			gw.GetCell(stateVariableStartRow + (k-1),4).SetValue("(" + opt.StateVariables[k-1].LowerBound.Format("%.3f") + ", undef)");
+		Else;
+			gw.GetCell(stateVariableStartRow + (k-1),4).SetValue("(undef, undef)");
+		End;
+	End;
+	
+	gw.SetRowHeight(stateVariableStartRow + numStateVariables, 10, 1);
+	
+	constraintStartRow = stateVariableStartRow + numStateVariables + 1;
+
+	If (numConstraints > 0);
+		gw.GetCell(constraintStartRow,1).SetValue("Constraints");
+		gw.GetCell(constraintStartRow,1).Font.Bold = 1;
+		For k = 1 to numConstraints;
+			gw.GetCell(constraintStartRow + (k-1),2).SetValue(opt.Constraints[k-1].Label);
+			gw.GetCell(constraintStartRow + (k-1),3).SetValue(0);
+			gw.GetCell(constraintStartRow + (k-1),3).TextColor = ColorTools.Green;
+			gw.GetCell(constraintStartRow + (k-1),4).SetValue("(" + opt.Constraints[k-1].LowerBound.Format("%.3f") + ", " + opt.Constraints[k-1].UpperBound.Format("%.3f") + ")");
+		End;
+		gw.SetRowHeight(constraintStartRow + numConstraints, 10, 1);
+	End;
+		
+	gw.EndBatchUpdate();
+	
+	gw.Show();
+	
+EndProcedure;

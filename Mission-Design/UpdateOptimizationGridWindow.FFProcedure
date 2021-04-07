@@ -1,0 +1,120 @@
+
+// UpdateOptimizationGridWindow(GridWindow, Optimizer)
+
+Define Procedure UpdateOptimizationGridWindow(GridWindow gw, Optimizer opt);
+
+	// Initialize Variables
+	Array bestStateVariables;
+	Array bestConstraints;
+	
+	Variable numStateVariables = opt.GetStateVariableValues.Count; // Number of state variables
+	Variable numConstraints = opt.GetConstraintValues.Count; // Number of constraints
+	Variable stateVariableStartRow; // Which row to start listing state variables
+	Variable constraintStartRow; // Which row to start listing costraints
+	Variable bestSolutionStartRow; // Which row to start the Best Solution section
+	Variable engineOutputStartRow; // Which row to start the Engine Output section
+	Variable k; // For loops
+	
+	gw.BeginBatchUpdate();
+	
+	// Header
+	If (opt.IsRunning == 1);
+		gw.GetCell(3,2).SetValue("Running");
+	ElseIf (opt.OptimizationPhase == 0);
+		gw.GetCell(3,2).SetValue("Not Started");
+	Else;
+		gw.GetCell(3,2).SetValue("Exited");
+	End;
+
+	If (opt.FeasibleSolutionFound);
+		gw.GetCell(4,2).SetValue("Yes");
+	Else;
+		gw.GetCell(4,2).SetValue("No");
+	End;
+
+	gw.GetCell(3,5).SetValue(opt.NominalEvaluationCount.Format("%.0f"));
+
+	gw.GetCell(4,5).SetValue(opt.TotalEvaluationCount.Format("%.0f"));
+
+	// Current Iteration
+	gw.GetCell(10,3).SetValue(opt.ObjectiveFunctionValue.Format("%.5f"));
+
+	If (opt.IsFeasible());
+		gw.GetCell(8,2).SetValue("Yes");
+		gw.GetCell(10,3).TextColor = ColorTools.Green;
+	Else;
+		gw.GetCell(8,2).SetValue("No");
+		gw.GetCell(10,3).TextColor = ColorTools.Red;
+	End;
+
+	gw.GetCell(8,5).SetValue(opt.MaximumInfeasibility.Format("%.3e"));
+	If (opt.MaximumInfeasibility >= opt.FeasibilityTolerance);
+		gw.GetCell(8,5).TextColor = ColorTools.Red;
+	Else;
+		gw.GetCell(8,5).TextColor = ColorTools.Green;
+	End;
+	
+	stateVariableStartRow = 12;
+	For k = 1 to numStateVariables;
+		gw.GetCell(stateVariableStartRow + (k-1),3).SetValue(opt.GetStateVariableValue(k-1).Format("%.5f"));
+	End;
+	
+	constraintStartRow = stateVariableStartRow + numStateVariables + 1;
+	If (numConstraints > 0);
+		For k = 1 to numConstraints;
+			gw.GetCell(constraintStartRow + (k-1),3).SetValue(opt.GetConstraintValue(k-1).Format("%.5f"));
+			If (opt.Constraints[k-1].LowerBound == opt.Constraints[k-1].UpperBound);
+				If (opt.GetConstraintValue(k-1) >= opt.Constraints[k-1].LowerBound - opt.FeasibilityTolerance and opt.GetConstraintValue(k-1) <= opt.Constraints[k-1].LowerBound + opt.FeasibilityTolerance);
+					gw.GetCell(constraintStartRow + (k-1),3).TextColor = ColorTools.Green;
+				Else;
+					gw.GetCell(constraintStartRow + (k-1),3).TextColor = ColorTools.Red;
+				End;
+			End;
+		End;
+	End;
+	
+	// Best Solution
+	If (numConstraints > 0);
+		bestSolutionStartRow = constraintStartRow + numConstraints + 1;
+	Else;
+		bestSolutionStartRow = constraintStartRow;
+	End;
+	
+	If (opt.FeasibleSolutionFound);
+		gw.GetCell(bestSolutionStartRow + 2,2).SetValue(opt.GetBestObjectiveFunctionValue.Format("%.5f"));
+		gw.GetCell(bestSolutionStartRow + 2,2).TextColor = ColorTools.Green;
+	Else;
+		gw.GetCell(bestSolutionStartRow + 2,2).SetValue("Feasible solution not yet found");
+		gw.GetCell(bestSolutionStartRow + 2,2).TextColor = ColorTools.Red;
+	End;
+	
+	stateVariableStartRow = bestSolutionStartRow + 4;
+	If (opt.FeasibleSolutionFound);
+		bestStateVariables = opt.GetBestStateVariableValues;
+		For k = 1 to numStateVariables;
+			gw.GetCell(stateVariableStartRow + (k-1),3).SetValue(bestStateVariables[k-1].Format("%.5f"));
+		End;
+		
+	Else;
+		For k = 1 to numStateVariables;
+			gw.GetCell(stateVariableStartRow + (k-1),3).SetValue('');
+		End;
+	End;
+	
+	constraintStartRow = stateVariableStartRow + numStateVariables + 1;
+	If (numConstraints > 0);
+		If (opt.FeasibleSolutionFound);
+			bestConstraints = opt.GetBestConstraintValues;
+			For k = 1 to numConstraints;
+				gw.GetCell(constraintStartRow + (k-1),3).SetValue(bestConstraints[k-1].Format("%.5f"));
+			End;
+		Else;
+			For k = 1 to numConstraints;
+				gw.GetCell(constraintStartRow + (k-1),3).SetValue('');
+			End;
+		End;
+	End;
+	
+	gw.EndBatchUpdate();
+	
+EndProcedure;
