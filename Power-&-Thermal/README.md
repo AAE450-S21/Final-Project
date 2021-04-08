@@ -20,6 +20,12 @@ Some Jupyter notebooks to calculate mass, power, & volume for solar panels. Main
 
 A trade study looking at launch schedule, mass, cost, and volume for solar panels vs. nuclear power to power the Habitat.
 
+### _thermal-Analysis_
+
+Some scripts supporting thermal analysis of the habitat and vehicles.
+
 ## Authors
 
 - Noah Stockwell
+- Alan Gelman
+- Elijah Weinstein
