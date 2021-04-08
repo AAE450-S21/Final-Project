@@ -29,3 +29,4 @@ Some scripts supporting thermal analysis of the habitat and vehicles.
 - Noah Stockwell
 - Alan Gelman
 - Elijah Weinstein
+- Hunter Mattingly
