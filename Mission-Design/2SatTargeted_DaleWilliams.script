@@ -1,0 +1,628 @@
+%General Mission Analysis Tool(GMAT) Script
+%Created: 2021-02-27 15:02:22
+
+
+%----------------------------------------
+%---------- Spacecraft
+%----------------------------------------
+
+Create Spacecraft CHELL_6;
+GMAT CHELL_6.DateFormat = UTCModJulian;
+GMAT CHELL_6.Epoch = '29757.25';
+GMAT CHELL_6.CoordinateSystem = EarthMJ2000Eq;
+GMAT CHELL_6.DisplayStateType = Keplerian;
+GMAT CHELL_6.SMA = 215562.0000000678;
+GMAT CHELL_6.ECC = 0.9676360000000089;
+GMAT CHELL_6.INC = 28.49999999999999;
+GMAT CHELL_6.RAAN = 63.75603300000003;
+GMAT CHELL_6.AOP = 245.201332;
+GMAT CHELL_6.TA = 1.825482000000342;
+GMAT CHELL_6.DryMass = 850;
+GMAT CHELL_6.Cd = 2.2;
+GMAT CHELL_6.Cr = 1.8;
+GMAT CHELL_6.DragArea = 15;
+GMAT CHELL_6.SRPArea = 1;
+GMAT CHELL_6.SPADDragScaleFactor = 1;
+GMAT CHELL_6.SPADSRPScaleFactor = 1;
+GMAT CHELL_6.NAIFId = -10000001;
+GMAT CHELL_6.NAIFIdReferenceFrame = -9000001;
+GMAT CHELL_6.OrbitColor = Red;
+GMAT CHELL_6.TargetColor = Teal;
+GMAT CHELL_6.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
+GMAT CHELL_6.CdSigma = 1e+70;
+GMAT CHELL_6.CrSigma = 1e+70;
+GMAT CHELL_6.Id = 'SatId';
+GMAT CHELL_6.Attitude = CoordinateSystemFixed;
+GMAT CHELL_6.SPADSRPInterpolationMethod = Bilinear;
+GMAT CHELL_6.SPADSRPScaleFactorSigma = 1e+70;
+GMAT CHELL_6.SPADDragInterpolationMethod = Bilinear;
+GMAT CHELL_6.SPADDragScaleFactorSigma = 1e+70;
+GMAT CHELL_6.ModelFile = 'aura.3ds';
+GMAT CHELL_6.ModelOffsetX = 0;
+GMAT CHELL_6.ModelOffsetY = 0;
+GMAT CHELL_6.ModelOffsetZ = 0;
+GMAT CHELL_6.ModelRotationX = 0;
+GMAT CHELL_6.ModelRotationY = 0;
+GMAT CHELL_6.ModelRotationZ = 0;
+GMAT CHELL_6.ModelScale = 1;
+GMAT CHELL_6.AttitudeDisplayStateType = 'Quaternion';
+GMAT CHELL_6.AttitudeRateDisplayStateType = 'AngularVelocity';
+GMAT CHELL_6.AttitudeCoordinateSystem = EarthMJ2000Eq;
+GMAT CHELL_6.EulerAngleSequence = '321';
+
+%----------------------------------------
+%---------- Spacecraft
+%----------------------------------------
+
+Create Spacecraft CHELL_3;
+GMAT CHELL_3.DateFormat = UTCGregorian;
+GMAT CHELL_3.Epoch = '26 Jun 2022 18:00:00.000';
+GMAT CHELL_3.CoordinateSystem = EarthMJ2000Eq;
+GMAT CHELL_3.DisplayStateType = Keplerian;
+GMAT CHELL_3.SMA = 215562.0000000678;
+GMAT CHELL_3.ECC = 0.9676360000000089;
+GMAT CHELL_3.INC = 28.49999999999999;
+GMAT CHELL_3.RAAN = 63.75603300000003;
+GMAT CHELL_3.AOP = 245.201332;
+GMAT CHELL_3.TA = 1.825482000000342;
+GMAT CHELL_3.DryMass = 850;
+GMAT CHELL_3.Cd = 2.2;
+GMAT CHELL_3.Cr = 1.8;
+GMAT CHELL_3.DragArea = 15;
+GMAT CHELL_3.SRPArea = 1;
+GMAT CHELL_3.SPADDragScaleFactor = 1;
+GMAT CHELL_3.SPADSRPScaleFactor = 1;
+GMAT CHELL_3.NAIFId = -10000001;
+GMAT CHELL_3.NAIFIdReferenceFrame = -9000001;
+GMAT CHELL_3.OrbitColor = [63 189 192];
+GMAT CHELL_3.TargetColor = Teal;
+GMAT CHELL_3.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
+GMAT CHELL_3.CdSigma = 1e+70;
+GMAT CHELL_3.CrSigma = 1e+70;
+GMAT CHELL_3.Id = 'SatId';
+GMAT CHELL_3.Attitude = CoordinateSystemFixed;
+GMAT CHELL_3.SPADSRPInterpolationMethod = Bilinear;
+GMAT CHELL_3.SPADSRPScaleFactorSigma = 1e+70;
+GMAT CHELL_3.SPADDragInterpolationMethod = Bilinear;
+GMAT CHELL_3.SPADDragScaleFactorSigma = 1e+70;
+GMAT CHELL_3.ModelFile = 'aura.3ds';
+GMAT CHELL_3.ModelOffsetX = 0;
+GMAT CHELL_3.ModelOffsetY = 0;
+GMAT CHELL_3.ModelOffsetZ = 0;
+GMAT CHELL_3.ModelRotationX = 0;
+GMAT CHELL_3.ModelRotationY = 0;
+GMAT CHELL_3.ModelRotationZ = 0;
+GMAT CHELL_3.ModelScale = 1;
+GMAT CHELL_3.AttitudeDisplayStateType = 'Quaternion';
+GMAT CHELL_3.AttitudeRateDisplayStateType = 'AngularVelocity';
+GMAT CHELL_3.AttitudeCoordinateSystem = EarthMJ2000Eq;
+GMAT CHELL_3.EulerAngleSequence = '321';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%----------------------------------------
+%---------- ForceModels
+%----------------------------------------
+
+Create ForceModel NearEarth_ForceModel;
+GMAT NearEarth_ForceModel.CentralBody = Earth;
+GMAT NearEarth_ForceModel.PrimaryBodies = {Earth};
+GMAT NearEarth_ForceModel.PointMasses = {Jupiter, Luna, Sun};
+GMAT NearEarth_ForceModel.Drag = None;
+GMAT NearEarth_ForceModel.SRP = On;
+GMAT NearEarth_ForceModel.RelativisticCorrection = Off;
+GMAT NearEarth_ForceModel.ErrorControl = RSSStep;
+GMAT NearEarth_ForceModel.GravityField.Earth.Degree = 4;
+GMAT NearEarth_ForceModel.GravityField.Earth.Order = 4;
+GMAT NearEarth_ForceModel.GravityField.Earth.StmLimit = 100;
+GMAT NearEarth_ForceModel.GravityField.Earth.PotentialFile = 'JGM2.cof';
+GMAT NearEarth_ForceModel.GravityField.Earth.TideModel = 'None';
+GMAT NearEarth_ForceModel.SRP.Flux = 1367;
+GMAT NearEarth_ForceModel.SRP.SRPModel = Spherical;
+GMAT NearEarth_ForceModel.SRP.Nominal_Sun = 149597870.691;
+
+Create ForceModel NearMoon_ForceModel;
+GMAT NearMoon_ForceModel.CentralBody = Luna;
+GMAT NearMoon_ForceModel.PrimaryBodies = {Luna};
+GMAT NearMoon_ForceModel.PointMasses = {Earth, Sun};
+GMAT NearMoon_ForceModel.Drag = None;
+GMAT NearMoon_ForceModel.SRP = On;
+GMAT NearMoon_ForceModel.RelativisticCorrection = Off;
+GMAT NearMoon_ForceModel.ErrorControl = RSSStep;
+GMAT NearMoon_ForceModel.GravityField.Luna.Degree = 4;
+GMAT NearMoon_ForceModel.GravityField.Luna.Order = 4;
+GMAT NearMoon_ForceModel.GravityField.Luna.StmLimit = 100;
+GMAT NearMoon_ForceModel.GravityField.Luna.PotentialFile = 'LP165P.cof';
+GMAT NearMoon_ForceModel.GravityField.Luna.TideModel = 'None';
+GMAT NearMoon_ForceModel.SRP.Flux = 1367;
+GMAT NearMoon_ForceModel.SRP.SRPModel = Spherical;
+GMAT NearMoon_ForceModel.SRP.Nominal_Sun = 149597870.691;
+
+%----------------------------------------
+%---------- Propagators
+%----------------------------------------
+
+Create Propagator NearEarth;
+GMAT NearEarth.FM = NearEarth_ForceModel;
+GMAT NearEarth.Type = RungeKutta89;
+GMAT NearEarth.InitialStepSize = 1;
+GMAT NearEarth.Accuracy = 9.999999999999999e-12;
+GMAT NearEarth.MinStep = 0.001;
+GMAT NearEarth.MaxStep = 2700;
+GMAT NearEarth.MaxStepAttempts = 50;
+GMAT NearEarth.StopIfAccuracyIsViolated = true;
+
+Create Propagator NearMoon;
+GMAT NearMoon.FM = NearMoon_ForceModel;
+GMAT NearMoon.Type = RungeKutta89;
+GMAT NearMoon.InitialStepSize = 60;
+GMAT NearMoon.Accuracy = 9.999999999999999e-12;
+GMAT NearMoon.MinStep = 0.001;
+GMAT NearMoon.MaxStep = 2700;
+GMAT NearMoon.MaxStepAttempts = 50;
+GMAT NearMoon.StopIfAccuracyIsViolated = true;
+
+%----------------------------------------
+%---------- Burns
+%----------------------------------------
+
+Create ImpulsiveBurn PlaneChange;
+GMAT PlaneChange.CoordinateSystem = Local;
+GMAT PlaneChange.Origin = Earth;
+GMAT PlaneChange.Axes = VNB;
+GMAT PlaneChange.Element1 = 0;
+GMAT PlaneChange.Element2 = 0;
+GMAT PlaneChange.Element3 = 0;
+GMAT PlaneChange.DecrementMass = false;
+GMAT PlaneChange.Isp = 300;
+GMAT PlaneChange.GravitationalAccel = 9.81;
+
+Create ImpulsiveBurn CaptureBurn;
+GMAT CaptureBurn.CoordinateSystem = Local;
+GMAT CaptureBurn.Origin = Luna;
+GMAT CaptureBurn.Axes = VNB;
+GMAT CaptureBurn.Element1 = 0;
+GMAT CaptureBurn.Element2 = 0;
+GMAT CaptureBurn.Element3 = 0;
+GMAT CaptureBurn.DecrementMass = false;
+GMAT CaptureBurn.Isp = 300;
+GMAT CaptureBurn.GravitationalAccel = 9.81;
+
+Create ImpulsiveBurn AjustRAAN;
+GMAT AjustRAAN.CoordinateSystem = Local;
+GMAT AjustRAAN.Origin = Luna;
+GMAT AjustRAAN.Axes = VNB;
+GMAT AjustRAAN.Element1 = 0;
+GMAT AjustRAAN.Element2 = 0;
+GMAT AjustRAAN.Element3 = 0;
+GMAT AjustRAAN.DecrementMass = false;
+GMAT AjustRAAN.Isp = 300;
+GMAT AjustRAAN.GravitationalAccel = 9.81;
+
+Create ImpulsiveBurn FinalizeINC;
+GMAT FinalizeINC.CoordinateSystem = Local;
+GMAT FinalizeINC.Origin = Luna;
+GMAT FinalizeINC.Axes = VNB;
+GMAT FinalizeINC.Element1 = 0;
+GMAT FinalizeINC.Element2 = 0;
+GMAT FinalizeINC.Element3 = 0;
+GMAT FinalizeINC.DecrementMass = false;
+GMAT FinalizeINC.Isp = 300;
+GMAT FinalizeINC.GravitationalAccel = 9.81;
+
+Create ImpulsiveBurn ReducePeriapsis;
+GMAT ReducePeriapsis.CoordinateSystem = Local;
+GMAT ReducePeriapsis.Origin = Luna;
+GMAT ReducePeriapsis.Axes = VNB;
+GMAT ReducePeriapsis.Element1 = 0;
+GMAT ReducePeriapsis.Element2 = 0;
+GMAT ReducePeriapsis.Element3 = 0;
+GMAT ReducePeriapsis.DecrementMass = false;
+GMAT ReducePeriapsis.Isp = 300;
+GMAT ReducePeriapsis.GravitationalAccel = 9.81;
+
+Create ImpulsiveBurn FinalizeOrbit;
+GMAT FinalizeOrbit.CoordinateSystem = Local;
+GMAT FinalizeOrbit.Origin = Luna;
+GMAT FinalizeOrbit.Axes = VNB;
+GMAT FinalizeOrbit.Element1 = 0;
+GMAT FinalizeOrbit.Element2 = 0;
+GMAT FinalizeOrbit.Element3 = 0;
+GMAT FinalizeOrbit.DecrementMass = false;
+GMAT FinalizeOrbit.Isp = 300;
+GMAT FinalizeOrbit.GravitationalAccel = 9.81;
+
+Create ImpulsiveBurn FinalizeOrbit2;
+GMAT FinalizeOrbit2.CoordinateSystem = Local;
+GMAT FinalizeOrbit2.Origin = Luna;
+GMAT FinalizeOrbit2.Axes = VNB;
+GMAT FinalizeOrbit2.Element1 = 0;
+GMAT FinalizeOrbit2.Element2 = 0;
+GMAT FinalizeOrbit2.Element3 = 0;
+GMAT FinalizeOrbit2.DecrementMass = false;
+GMAT FinalizeOrbit2.Isp = 300;
+GMAT FinalizeOrbit2.GravitationalAccel = 9.81;
+
+Create ImpulsiveBurn RecuceApoC2;
+GMAT RecuceApoC2.CoordinateSystem = Local;
+GMAT RecuceApoC2.Origin = Earth;
+GMAT RecuceApoC2.Axes = VNB;
+GMAT RecuceApoC2.Element1 = 0;
+GMAT RecuceApoC2.Element2 = 0;
+GMAT RecuceApoC2.Element3 = 0;
+GMAT RecuceApoC2.DecrementMass = false;
+GMAT RecuceApoC2.Isp = 300;
+GMAT RecuceApoC2.GravitationalAccel = 9.81;
+
+%----------------------------------------
+%---------- Coordinate Systems
+%----------------------------------------
+
+Create CoordinateSystem LunaInertial;
+GMAT LunaInertial.Origin = Luna;
+GMAT LunaInertial.Axes = BodyInertial;
+
+%----------------------------------------
+%---------- Solvers
+%----------------------------------------
+
+Create DifferentialCorrector DefaultDC;
+GMAT DefaultDC.ShowProgress = true;
+GMAT DefaultDC.ReportStyle = Normal;
+GMAT DefaultDC.ReportFile = 'DifferentialCorrectorDefaultDC.data';
+GMAT DefaultDC.MaximumIterations = 100;
+GMAT DefaultDC.DerivativeMethod = ForwardDifference;
+GMAT DefaultDC.Algorithm = NewtonRaphson;
+
+%----------------------------------------
+%---------- Subscribers
+%----------------------------------------
+
+Create OrbitView EarthCentral;
+GMAT EarthCentral.SolverIterations = Current;
+GMAT EarthCentral.UpperLeft = [ 0.2029411764705882 0.2493857493857494 ];
+GMAT EarthCentral.Size = [ 0.5588235294117647 0.4459459459459459 ];
+GMAT EarthCentral.RelativeZOrder = 208;
+GMAT EarthCentral.Maximized = false;
+GMAT EarthCentral.Add = {CHELL_6, CHELL_3, Earth, Luna};
+GMAT EarthCentral.CoordinateSystem = EarthMJ2000Eq;
+GMAT EarthCentral.DrawObject = [ true true true true ];
+GMAT EarthCentral.DataCollectFrequency = 1;
+GMAT EarthCentral.UpdatePlotFrequency = 50;
+GMAT EarthCentral.NumPointsToRedraw = 0;
+GMAT EarthCentral.ShowPlot = true;
+GMAT EarthCentral.MaxPlotPoints = 20000;
+GMAT EarthCentral.ShowLabels = true;
+GMAT EarthCentral.ViewPointReference = Earth;
+GMAT EarthCentral.ViewPointVector = [ 30000 0 0 ];
+GMAT EarthCentral.ViewDirection = Earth;
+GMAT EarthCentral.ViewScaleFactor = 1;
+GMAT EarthCentral.ViewUpCoordinateSystem = EarthMJ2000Eq;
+GMAT EarthCentral.ViewUpAxis = Z;
+GMAT EarthCentral.EclipticPlane = Off;
+GMAT EarthCentral.XYPlane = Off;
+GMAT EarthCentral.WireFrame = Off;
+GMAT EarthCentral.Axes = On;
+GMAT EarthCentral.Grid = Off;
+GMAT EarthCentral.SunLine = Off;
+GMAT EarthCentral.UseInitialView = On;
+GMAT EarthCentral.StarCount = 7000;
+GMAT EarthCentral.EnableStars = On;
+GMAT EarthCentral.EnableConstellations = On;
+
+Create OrbitView Selenocentric;
+GMAT Selenocentric.SolverIterations = Current;
+GMAT Selenocentric.UpperLeft = [ 0.1735294117647059 -40.0036855036855 ];
+GMAT Selenocentric.Size = [ 0.591764705882353 0.4459459459459459 ];
+GMAT Selenocentric.RelativeZOrder = 193;
+GMAT Selenocentric.Maximized = false;
+GMAT Selenocentric.Add = {CHELL_6, CHELL_3, Earth, Luna};
+GMAT Selenocentric.CoordinateSystem = LunaInertial;
+GMAT Selenocentric.DrawObject = [ true true true true ];
+GMAT Selenocentric.DataCollectFrequency = 1;
+GMAT Selenocentric.UpdatePlotFrequency = 50;
+GMAT Selenocentric.NumPointsToRedraw = 0;
+GMAT Selenocentric.ShowPlot = true;
+GMAT Selenocentric.MaxPlotPoints = 20000;
+GMAT Selenocentric.ShowLabels = true;
+GMAT Selenocentric.ViewPointReference = Luna;
+GMAT Selenocentric.ViewPointVector = [ 0 0 30000 ];
+GMAT Selenocentric.ViewDirection = Luna;
+GMAT Selenocentric.ViewScaleFactor = 1;
+GMAT Selenocentric.ViewUpCoordinateSystem = LunaInertial;
+GMAT Selenocentric.ViewUpAxis = Z;
+GMAT Selenocentric.EclipticPlane = Off;
+GMAT Selenocentric.XYPlane = On;
+GMAT Selenocentric.WireFrame = Off;
+GMAT Selenocentric.Axes = On;
+GMAT Selenocentric.Grid = Off;
+GMAT Selenocentric.SunLine = Off;
+GMAT Selenocentric.UseInitialView = On;
+GMAT Selenocentric.StarCount = 7000;
+GMAT Selenocentric.EnableStars = Off;
+GMAT Selenocentric.EnableConstellations = Off;
+
+Create ReportFile ReportFile1;
+GMAT ReportFile1.SolverIterations = Current;
+GMAT ReportFile1.UpperLeft = [ 0.07692307692307693 0.1597051597051597 ];
+GMAT ReportFile1.Size = [ 0.5818070818070818 0.7616707616707616 ];
+GMAT ReportFile1.RelativeZOrder = 654;
+GMAT ReportFile1.Maximized = false;
+GMAT ReportFile1.Filename = 'ReportFile1.txt';
+GMAT ReportFile1.Precision = 16;
+GMAT ReportFile1.Add = {CHELL_6.LunaInertial.RAAN, CHELL_6.LunaInertial.INC};
+GMAT ReportFile1.WriteHeaders = true;
+GMAT ReportFile1.LeftJustify = On;
+GMAT ReportFile1.ZeroFill = Off;
+GMAT ReportFile1.FixedWidth = true;
+GMAT ReportFile1.Delimiter = ' ';
+GMAT ReportFile1.ColumnWidth = 23;
+GMAT ReportFile1.WriteReport = true;
+
+Create ReportFile FinalCharacteristics;
+GMAT FinalCharacteristics.SolverIterations = Current;
+GMAT FinalCharacteristics.UpperLeft = [ 0.06043956043956044 0.0687960687960688 ];
+GMAT FinalCharacteristics.Size = [ 0.5952380952380952 0.7899262899262899 ];
+GMAT FinalCharacteristics.RelativeZOrder = 720;
+GMAT FinalCharacteristics.Maximized = false;
+GMAT FinalCharacteristics.Filename = 'C:\Users\Dale Admin\Documents\AAE\Spring2021\AAE 450\NonCoplanar\SystematicApproach\ConstellationInsert\UsingEphemerides\ConvergedTrajectories\RetargetWith2\FinalOrbitChars.txt';
+GMAT FinalCharacteristics.Precision = 16;
+GMAT FinalCharacteristics.WriteHeaders = true;
+GMAT FinalCharacteristics.LeftJustify = On;
+GMAT FinalCharacteristics.ZeroFill = Off;
+GMAT FinalCharacteristics.FixedWidth = true;
+GMAT FinalCharacteristics.Delimiter = ' ';
+GMAT FinalCharacteristics.ColumnWidth = 23;
+GMAT FinalCharacteristics.WriteReport = true;
+
+Create ReportFile FinalDV;
+GMAT FinalDV.SolverIterations = Current;
+GMAT FinalDV.UpperLeft = [ 0.07753357753357754 0.156019656019656 ];
+GMAT FinalDV.Size = [ 0.5989010989010989 0.7972972972972973 ];
+GMAT FinalDV.RelativeZOrder = 602;
+GMAT FinalDV.Maximized = false;
+GMAT FinalDV.Filename = 'C:\Users\Dale Admin\Documents\AAE\Spring2021\AAE 450\NonCoplanar\SystematicApproach\ConstellationInsert\UsingEphemerides\ConvergedTrajectories\RetargetWith2\FinalDVs.txt';
+GMAT FinalDV.Precision = 16;
+GMAT FinalDV.WriteHeaders = true;
+GMAT FinalDV.LeftJustify = On;
+GMAT FinalDV.ZeroFill = Off;
+GMAT FinalDV.FixedWidth = true;
+GMAT FinalDV.Delimiter = ' ';
+GMAT FinalDV.ColumnWidth = 23;
+GMAT FinalDV.WriteReport = true;
+
+Create OpenFramesInterface OpenFrames1;
+GMAT OpenFrames1.SolverIterations = Current;
+GMAT OpenFrames1.UpperLeft = [ 0.1476470588235294 0.2137592137592138 ];
+GMAT OpenFrames1.Size = [ 0.52 0.5110565110565111 ];
+GMAT OpenFrames1.RelativeZOrder = 244;
+GMAT OpenFrames1.Maximized = true;
+GMAT OpenFrames1.Add = {CHELL_6, CHELL_3, Earth, Luna};
+GMAT OpenFrames1.View = {CoordinateSystemView1, EarthView1, LunaView1, CommSatView1, CommSatView2};
+GMAT OpenFrames1.CoordinateSystem = LunaInertial;
+GMAT OpenFrames1.DrawObject = [ true true true true ];
+GMAT OpenFrames1.DrawTrajectory = [ true true true true ];
+GMAT OpenFrames1.DrawAxes = [ false false false false ];
+GMAT OpenFrames1.DrawXYPlane = [ false false false false ];
+GMAT OpenFrames1.DrawLabel = [ true true true true ];
+GMAT OpenFrames1.DrawUsePropLabel = [ false false false false ];
+GMAT OpenFrames1.DrawCenterPoint = [ true true false false ];
+GMAT OpenFrames1.DrawEndPoints = [ true true false false ];
+GMAT OpenFrames1.DrawVelocity = [ false false false false ];
+GMAT OpenFrames1.DrawGrid = [ false false false false ];
+GMAT OpenFrames1.DrawLineWidth = [ 2 2 2 2 ];
+GMAT OpenFrames1.DrawMarkerSize = [ 10 10 10 10 ];
+GMAT OpenFrames1.DrawFontSize = [ 14 14 14 14 ];
+GMAT OpenFrames1.Axes = On;
+GMAT OpenFrames1.AxesLength = 1;
+GMAT OpenFrames1.AxesLabels = On;
+GMAT OpenFrames1.FrameLabel = Off;
+GMAT OpenFrames1.XYPlane = On;
+GMAT OpenFrames1.EclipticPlane = Off;
+GMAT OpenFrames1.EnableStars = Off;
+GMAT OpenFrames1.StarCatalog = 'inp_StarsHYGv3.txt';
+GMAT OpenFrames1.StarCount = 40000;
+GMAT OpenFrames1.MinStarMag = -2;
+GMAT OpenFrames1.MaxStarMag = 6;
+GMAT OpenFrames1.MinStarPixels = 1;
+GMAT OpenFrames1.MaxStarPixels = 10;
+GMAT OpenFrames1.MinStarDimRatio = 0.5;
+GMAT OpenFrames1.ShowPlot = true;
+GMAT OpenFrames1.ShowToolbar = true;
+GMAT OpenFrames1.SolverIterLastN = 1;
+GMAT OpenFrames1.ShowVR = false;
+GMAT OpenFrames1.PlaybackTimeScale = 3600;
+GMAT OpenFrames1.MultisampleAntiAliasing = On;
+GMAT OpenFrames1.MSAASamples = 2;
+GMAT OpenFrames1.DrawFontPosition = {'Top-Right', 'Top-Right', 'Top-Right', 'Top-Right'};
+
+%----------------------------------------
+%---------- Arrays, Variables, Strings
+%----------------------------------------
+Create Variable PropTimeLuna;
+GMAT PropTimeLuna = 0;
+
+
+
+
+
+
+
+
+
+
+%----------------------------------------
+%---------- User Objects
+%----------------------------------------
+
+Create OpenFramesView CoordinateSystemView1;
+GMAT CoordinateSystemView1.ViewFrame = CoordinateSystem;
+GMAT CoordinateSystemView1.ViewTrajectory = Off;
+GMAT CoordinateSystemView1.InertialFrame = Off;
+GMAT CoordinateSystemView1.SetDefaultLocation = Off;
+GMAT CoordinateSystemView1.SetCurrentLocation = On;
+GMAT CoordinateSystemView1.CurrentEye = [ -36406052.51103072 -26379849.01454974 79846238.19641475 ];
+GMAT CoordinateSystemView1.CurrentCenter = [ -34774029.17813017 -7639211.128751844 64085343.13704695 ];
+GMAT CoordinateSystemView1.CurrentUp = [ 0.9385620374083761 0.1705740175730837 0.3000096772852757 ];
+GMAT CoordinateSystemView1.FOVy = 45;
+
+Create OpenFramesView EarthView1;
+GMAT EarthView1.ViewFrame = Earth;
+GMAT EarthView1.ViewTrajectory = Off;
+GMAT EarthView1.InertialFrame = Off;
+GMAT EarthView1.SetDefaultLocation = Off;
+GMAT EarthView1.SetCurrentLocation = Off;
+GMAT EarthView1.FOVy = 45;
+
+Create OpenFramesView LunaView1;
+GMAT LunaView1.ViewFrame = Luna;
+GMAT LunaView1.ViewTrajectory = Off;
+GMAT LunaView1.InertialFrame = Off;
+GMAT LunaView1.SetDefaultLocation = Off;
+GMAT LunaView1.SetCurrentLocation = On;
+GMAT LunaView1.CurrentEye = [ 29205.02472182056 -7618.639950823027 1091.222144259993 ];
+GMAT LunaView1.CurrentCenter = [ 7.909236160201544 -76.50372574529865 -516.9422554307641 ];
+GMAT LunaView1.CurrentUp = [ -0.06429322790198544 -0.03624950933749327 0.9972724572145438 ];
+GMAT LunaView1.FOVy = 45;
+
+Create OpenFramesView CommSatView1;
+GMAT CommSatView1.ViewFrame = CHELL_6;
+GMAT CommSatView1.ViewTrajectory = Off;
+GMAT CommSatView1.InertialFrame = Off;
+GMAT CommSatView1.SetDefaultLocation = Off;
+GMAT CommSatView1.SetCurrentLocation = On;
+GMAT CommSatView1.CurrentEye = [ 12494.54483223128 -12973.17936002785 -541.1669637809755 ];
+GMAT CommSatView1.CurrentCenter = [ 0 0 -9.094947017729282e-13 ];
+GMAT CommSatView1.CurrentUp = [ -0.1688438372895651 -0.2028497242215219 0.9645432846651245 ];
+GMAT CommSatView1.FOVy = 45;
+
+Create OpenFramesView CommSatView2;
+GMAT CommSatView2.ViewFrame = CHELL_3;
+GMAT CommSatView2.ViewTrajectory = Off;
+GMAT CommSatView2.InertialFrame = Off;
+GMAT CommSatView2.SetDefaultLocation = Off;
+GMAT CommSatView2.SetCurrentLocation = On;
+GMAT CommSatView2.CurrentEye = [ -17036.40622362892 -14750.62123424074 1743.858956873945 ];
+GMAT CommSatView2.CurrentCenter = [ 944.5475456207387 -1589.994981816175 -1296.416657127193 ];
+GMAT CommSatView2.CurrentUp = [ 0.263004641659021 -0.1387725968988258 0.9547621299652423 ];
+GMAT CommSatView2.FOVy = 45;
+
+
+%----------------------------------------
+%---------- Mission Sequence
+%----------------------------------------
+
+BeginMissionSequence;
+Propagate 'Prop To Inc Adj' Synchronized NearEarth(CHELL_6) NearEarth(CHELL_3) {CHELL_6.ElapsedDays = 2.5};
+
+Target 'Target Inclination' DefaultDC {SolveMode = Solve, ExitMode = DiscardAndContinue, ShowProgressWindow = true};
+   Vary 'Tangential' DefaultDC(PlaneChange.Element1 = 0.02633794514157808, {Perturbation = 0.0001, Lower = -1, Upper = 1, MaxStep = 0.2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary 'Normal' DefaultDC(PlaneChange.Element2 = 0.06953575773554994, {Perturbation = 0.0001, Lower = -1, Upper = 1, MaxStep = 0.2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary 'Binormal' DefaultDC(PlaneChange.Element3 = 0.01873471578917586, {Perturbation = 0.0001, Lower = -1, Upper = 1, MaxStep = 0.2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Maneuver 'ExecuteInclinationBurn' PlaneChange(CHELL_6);
+   Maneuver PlaneChange(CHELL_3);
+   Propagate 'ProptoPerilune' Synchronized NearEarth(CHELL_6) NearEarth(CHELL_3) {CHELL_6.Luna.Periapsis, OrbitColor = [134 121 126]};
+   Achieve 'Achieve i=90' DefaultDC(CHELL_6.LunaInertial.INC = 90, {Tolerance = 0.1});
+   Achieve 'Achieve r=4500' DefaultDC(CHELL_6.Luna.RMAG = 4500, {Tolerance = 0.1});
+EndTarget;  % For targeter DefaultDC
+
+Target 'TargetEccentricCapture' DefaultDC {SolveMode = Solve, ExitMode = DiscardAndContinue, ShowProgressWindow = true};
+   Vary 'Tangential' DefaultDC(CaptureBurn.Element1 = -0.4444230966506997, {Perturbation = 0.0001, Lower = -2, Upper = 2, MaxStep = 0.2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary 'Normal' DefaultDC(CaptureBurn.Element2 = -9.412064252937924e-07, {Perturbation = 0.0001, Lower = -2, Upper = 2, MaxStep = 0.2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary 'Binormal' DefaultDC(CaptureBurn.Element3 = -5.34545440750055e-06, {Perturbation = 0.0001, Lower = -2, Upper = 2, MaxStep = 0.2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Maneuver 'ECM' CaptureBurn(CHELL_6);
+   Maneuver CaptureBurn(CHELL_3);
+   Achieve 'Achieve e=0.5' DefaultDC(CHELL_6.Luna.ECC = 0.5, {Tolerance = 0.1});
+   Achieve 'Achieve i=90' DefaultDC(CHELL_6.LunaInertial.INC = 90, {Tolerance = 0.1});
+EndTarget;  % For targeter DefaultDC
+
+Propagate 'Propagate to Apoapsis' Synchronized NearMoon(CHELL_6) NearMoon(CHELL_3) {CHELL_6.Luna.Apoapsis, OrbitColor = [22 17 238]};
+
+Target 'TargetRAAN' DefaultDC {SolveMode = Solve, ExitMode = DiscardAndContinue, ShowProgressWindow = true};
+   Vary 'Tangential' DefaultDC(AjustRAAN.Element1 = -0.002286743160581306, {Perturbation = 0.0001, Lower = -2, Upper = 2, MaxStep = 0.2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary 'Normal' DefaultDC(AjustRAAN.Element2 = -0.06285722502018203, {Perturbation = 0.0001, Lower = -2, Upper = 2, MaxStep = 0.2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary 'BiNormal' DefaultDC(AjustRAAN.Element3 = -3.759272113754348e-05, {Perturbation = 0.0001, Lower = -2, Upper = 2, MaxStep = 0.2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Maneuver 'RAM' AjustRAAN(CHELL_6);
+   Maneuver AjustRAAN(CHELL_3);
+   Achieve 'Achive RAAN = 240' DefaultDC(CHELL_6.LunaInertial.RAAN = 240, {Tolerance = 0.001});
+   Achieve 'Achieve e = 0.5' DefaultDC(CHELL_6.Luna.ECC = 0.5, {Tolerance = 0.1});
+EndTarget;  % For targeter DefaultDC
+
+Propagate 'PropToNode' Synchronized NearMoon(CHELL_6) NearMoon(CHELL_3) {CHELL_6.LunaInertial.Z = 0, OrbitColor = [48 234 21]};
+
+Target 'TargetInclination' DefaultDC {SolveMode = Solve, ExitMode = DiscardAndContinue, ShowProgressWindow = true};
+   Vary 'Normal' DefaultDC(FinalizeINC.Element2 = -0.06797281534335545, {Perturbation = 0.0001, Lower = -0.2, Upper = 0.2, MaxStep = 0.2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Maneuver 'ApplyIncAdjust' FinalizeINC(CHELL_6);
+   Maneuver FinalizeINC(CHELL_3);
+   Achieve 'Achieve INC = 80' DefaultDC(CHELL_6.LunaInertial.INC = 80, {Tolerance = 0.01});
+EndTarget;  % For targeter DefaultDC
+
+Propagate 'PropToApo' Synchronized NearMoon(CHELL_6) NearMoon(CHELL_3) {CHELL_6.Luna.Apoapsis, OrbitColor = [216 39 211]};
+
+Target 'TargetLower' DefaultDC {SolveMode = Solve, ExitMode = DiscardAndContinue, ShowProgressWindow = true};
+   Vary 'Tangential' DefaultDC(ReducePeriapsis.Element1 = -0.03927210804528232, {Perturbation = 0.0001, Lower = -1, Upper = 0, MaxStep = 0.2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Maneuver 'ApplyPeriluneReduction' ReducePeriapsis(CHELL_6);
+   Maneuver ReducePeriapsis(CHELL_3);
+   Achieve 'Achieve rp = 3238.2' DefaultDC(CHELL_6.Luna.RadPer = 3238.2, {Tolerance = 0.1});
+EndTarget;  % For targeter DefaultDC
+
+Propagate 'PropToPerilune' Synchronized NearMoon(CHELL_6) NearMoon(CHELL_3) {CHELL_6.Luna.Periapsis, OrbitColor = [230 215 26]};
+GMAT CHELL_3 = CHELL_6;
+Target 'ReduceApolune1' DefaultDC {SolveMode = Solve, ExitMode = DiscardAndContinue, ShowProgressWindow = true};
+   Vary 'Tangential' DefaultDC(FinalizeOrbit.Element1 = -0.3150647031837387, {Perturbation = 0.0001, Lower = -1, Upper = 0, MaxStep = 0.2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary 'Normal' DefaultDC(FinalizeOrbit.Element2 = -0.005174696005709776, {Perturbation = 0.0001, Lower = -1, Upper = 1, MaxStep = 0.2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary 'Binormal' DefaultDC(FinalizeOrbit.Element3 = -2.812502412014243e-05, {Perturbation = 0.0001, Lower = -1, Upper = 1, MaxStep = 0.2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Maneuver 'AplyApoRedux1' FinalizeOrbit(CHELL_6);
+   Achieve 'Achieve e=0' DefaultDC(CHELL_6.Luna.ECC = 0, {Tolerance = 0.01});
+   Achieve 'Achieve RAAN = 240' DefaultDC(CHELL_6.LunaInertial.RAAN = 240, {Tolerance = 0.01});
+EndTarget;  % For targeter DefaultDC
+GMAT PropTimeLuna = 2.5*CHELL_6.Luna.OrbitPeriod;
+Target 'ReduceApolune2' DefaultDC {SolveMode = Solve, ExitMode = DiscardAndContinue, ShowProgressWindow = true};
+   Vary 'Tangential' DefaultDC(RecuceApoC2.Element1 = 0, {Perturbation = 0.0001, Lower = -1, Upper = 1, MaxStep = 0.2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary 'Normal' DefaultDC(RecuceApoC2.Element2 = 0, {Perturbation = 0.0001, Lower = -1, Upper = 1, MaxStep = 0.2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary 'Binormal' DefaultDC(RecuceApoC2.Element3 = 0, {Perturbation = 0.0001, Lower = -1, Upper = 1, MaxStep = 0.2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Maneuver 'AplyApoRedux' RecuceApoC2(CHELL_3);
+   Achieve 'Achieve RadApo' DefaultDC(CHELL_3.Luna.RadApo = 4.276996480502451e+03, {Tolerance = 0.01});
+   Achieve 'Achieve RAAN' DefaultDC(CHELL_3.LunaInertial.RAAN = 240, {Tolerance = 0.01});
+EndTarget;  % For targeter DefaultDC
+Propagate Synchronized NearMoon(CHELL_6) NearMoon(CHELL_3) {CHELL_6.ElapsedSecs = PropTimeLuna};
+
+
+Target 'ReducePerilune2' DefaultDC {SolveMode = Solve, ExitMode = DiscardAndContinue, ShowProgressWindow = true};
+   Vary 'Tangential' DefaultDC(FinalizeOrbit2.Element1 = -0.3150647031837387, {Perturbation = 0.0001, Lower = -1, Upper = 1, MaxStep = 0.2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary 'Normal' DefaultDC(FinalizeOrbit2.Element2 = -0.005174696005709776, {Perturbation = 0.0001, Lower = -1, Upper = 1, MaxStep = 0.2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary 'Binormal' DefaultDC(FinalizeOrbit2.Element3 = -2.812502412014243e-05, {Perturbation = 0.0001, Lower = -1, Upper = 1, MaxStep = 0.2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Maneuver 'FinalizeC2' FinalizeOrbit2(CHELL_3);
+   Achieve 'Achieve RadApo' DefaultDC(CHELL_3.Luna.ECC = 0, {Tolerance = 0.001});
+   Achieve 'Achieve RAAN' DefaultDC(CHELL_3.LunaInertial.RAAN = 240, {Tolerance = 0.01});
+EndTarget;  % For targeter DefaultDC
+
+Propagate Synchronized NearMoon(CHELL_6) NearMoon(CHELL_3) {CHELL_6.ElapsedSecs = CHELL_6.Luna.OrbitPeriod};
+Report 'ReportFinalDV' FinalDV PlaneChange.Element1 PlaneChange.Element2 PlaneChange.Element3 CaptureBurn.Element1 CaptureBurn.Element2 CaptureBurn.Element3 AjustRAAN.Element1 AjustRAAN.Element2 AjustRAAN.Element3 FinalizeINC.Element1 FinalizeINC.Element2 FinalizeINC.Element3 ReducePeriapsis.Element1 ReducePeriapsis.Element2 ReducePeriapsis.Element3 FinalizeOrbit.Element1 FinalizeOrbit.Element2 FinalizeOrbit.Element3 RecuceApoC2.Element1 RecuceApoC2.Element2 RecuceApoC2.Element3 FinalizeOrbit2.Element1 FinalizeOrbit2.Element2 FinalizeOrbit2.Element3;
+Report 'ReportFinalChars' FinalCharacteristics CHELL_6.Luna.SMA CHELL_6.Luna.ECC CHELL_6.LunaInertial.RAAN CHELL_6.LunaInertial.INC CHELL_6.LunaInertial.RA CHELL_6.LunaInertial.DEC CHELL_3.Luna.SMA CHELL_3.Luna.ECC CHELL_3.LunaInertial.RAAN CHELL_3.LunaInertial.INC CHELL_3.LunaInertial.RA CHELL_3.LunaInertial.DEC;
+
+
+
+
+
+
+
+
